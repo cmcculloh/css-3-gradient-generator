@@ -55,9 +55,12 @@
           if(!isset($numstops)){
             $numstops=5;
           }
-          for($i=0;$i<$_GET["numstops"];$i++){
+          $stopdistribution = 100/$numstops;
+
+          for($i=1;$i<$numstops;$i++){
             echo '<li>';
-            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.001" value="'.($i*10).'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
+            $stop = $i * $stopdistribution;
+            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.001" value="'.$stop.'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
             $color = $i . $i . $i;
             echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="' . $color . '" id="stop' . $i . 'color" name="stop'. $i . 'color">';
             echo '</li>';
