@@ -51,14 +51,25 @@
       <div id="gradient"></div>
       <div id="controls">
         <ul><?php
-          for($i=0;$i<10;$i++){
+          $numstops = $_GET["numstops"];
+          if(!isset($numstops)){
+            $numstops=5;
+          }
+          for($i=0;$i<$_GET["numstops"];$i++){
             echo '<li>';
             echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.1" value="'.($i*10).'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
             echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="8888'.$i.'8" id="stop' . $i . 'color" name="stop'. $i . 'color">';
             echo '</li>';
           }
         ?></ul>
+        <br>
+      <form>
+        <label for="numstops">Number of Stops:</label><input type="number" min="0" step="1" value="5" name="numstops" id="numstops"><br>
+
+        <input type="submit" value="change stops. DOES NOT SAVE CURRENT WORK">
+      </form>
       </div>
+      
     </div>
     <footer>
 
