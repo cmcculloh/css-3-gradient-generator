@@ -67,6 +67,8 @@
           }
         ?></ul>
         <br>
+        <p><input type="button" value="toggle orientation" id="toggleorientation"></p>
+        <br>
       <form>
         <label for="numstops">Number of Stops:</label><input type="number" min="0" step="1" value="5" name="numstops" id="numstops"><br>
 
@@ -110,8 +112,20 @@
       buildGradient();
     });
 
+    jQuery("#toggleorientation").bind("click", function(){
+      if(orientation == "top"){
+        orientation = "left";
+      }else{
+        orientation = "top";
+      }
+
+      buildGradient();
+    });
+
     var gradients = {
     }
+
+    var orientation = "top";
 
     getProperties = function(){
       jQuery("ul li").each(function(index){
@@ -132,7 +146,7 @@
     buildGradient = function(){
       var bg;
 
-      bg = "-webkit-linear-gradient(top";
+      bg = "-webkit-linear-gradient(" + orientation;
       jQuery.each(gradients, function(key, value){
         bg += ", #" + gradients[key]["color"] + " " + gradients[key]["location"] + "%";
       });
