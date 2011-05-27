@@ -57,8 +57,9 @@
           }
           for($i=0;$i<$_GET["numstops"];$i++){
             echo '<li>';
-            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.1" value="'.($i*10).'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
-            echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="8888'.$i.'8" id="stop' . $i . 'color" name="stop'. $i . 'color">';
+            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.001" value="'.($i*10).'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
+            $color = $i . $i . $i;
+            echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="' . $color . '" id="stop' . $i . 'color" name="stop'. $i . 'color">';
             echo '</li>';
           }
         ?></ul>
@@ -68,6 +69,7 @@
 
         <input type="submit" value="change stops. DOES NOT SAVE CURRENT WORK">
       </form>
+      <textarea id="output" rows="5" cols="80"></textarea>
       </div>
       
     </div>
@@ -127,7 +129,7 @@
     buildGradient = function(){
       var bg;
 
-      bg = "-webkit-linear-gradient(left";
+      bg = "-webkit-linear-gradient(top";
       jQuery.each(gradients, function(key, value){
         bg += ", #" + gradients[key]["color"] + " " + gradients[key]["location"] + "%";
       });
@@ -137,6 +139,7 @@
 
       console.log("background: " + bg);
 
+      jQuery("#output").val("background: " + bg);
     }
 
     getProperties();
