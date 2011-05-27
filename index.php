@@ -32,6 +32,13 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-1.7.min.js"></script>
 
+  <style>
+    #gradient{
+      width: 600px;
+      height: 200px;
+      border: 1px solid black;
+    }
+  </style>
 </head>
 
 <body>
@@ -41,7 +48,17 @@
 
     </header>
     <div id="main" role="main">
-
+      <div id="gradient"></div>
+      <div id="controls">
+        <ul><?php
+          for($i=0;$i<10;$i++){
+            echo '<li>';
+            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.1" value="'.($i*10).'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
+            echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="8888'.$i.'8" id="stop' . $i . 'color" name="stop'. $i . 'color">';
+            echo '</li>';
+          }
+        ?></ul>
+      </div>
     </div>
     <footer>
 
@@ -61,6 +78,59 @@
   <script src="js/script.js"></script>
   <!-- end scripts-->
 
+  <script>
+    jQuery("ul input").bind("change", function(){
+      var $obj = jQuery(this);
+      var id = $obj.attr("id");
+      id = id.replace("location", "").replace("color", "");
+      if($obj.attr("type") == "number"){
+        console.log("changing location of " + id + " to " + $obj.val());
+        gradients[id]["location"] = $obj.val();
+      }else{
+        gradients[id]["color"] = $obj.val();
+      }
+      console.dir(gradients);
+      
+      buildGradient();
+    });
+
+    var gradients = {
+    }
+
+    getProperties = function(){
+      jQuery("ul li").each(function(index){
+        gradients["stop" + index]={};
+      });
+
+      jQuery("ul input[type=number]").each(function(index){
+        gradients["stop" + index]["location"] = $(this).val();
+        console.log("stop" + index + "; loc: " + $(this).val());
+      });
+
+      jQuery("ul input[type=text]").each(function(index){
+        gradients["stop" + index]["color"] = $(this).val();
+        console.log("stop" + index + "; color: " + $(this).val());
+      });
+    }
+
+    buildGradient = function(){
+      var bg;
+
+      bg = "-webkit-linear-gradient(left";
+      jQuery.each(gradients, function(key, value){
+        bg += ", #" + gradients[key]["color"] + " " + gradients[key]["location"] + "%";
+      });
+
+      bg += ")";
+      jQuery("#gradient").css({"background": bg});
+
+      console.log("background: " + bg);
+
+    }
+
+    getProperties();
+    buildGradient();
+  </script>
 
   <!--[if lt IE 7 ]>
     <script src="js/libs/dd_belatedpng.js"></script>
