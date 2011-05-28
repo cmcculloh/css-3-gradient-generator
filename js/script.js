@@ -1,6 +1,15 @@
-/* Author: 
+/* Author: Christopher McCulloh
 
 */
+
+;var limeberry = {
+    numSaved : 0
+  , numStops : 4
+  , init : function()
+  , generateLocation: function()
+  , buildRandomHexColor: function()
+  , normalizeHexColor: function()
+};
 
 var numSaved = 0;
 var numStops = 4;
