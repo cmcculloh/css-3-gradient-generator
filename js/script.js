@@ -2,7 +2,26 @@
 
 */
 
+var numSaved = 0;
+var saveTemplate = function(gradients){
+	var theHTML;
 
+	theHTML = '<div id="saved' + numSaved + '" class="pastGradientState">';
+	theHTML += '<style>#saved'+numSaved+'{float: left; width: 50px; height: 50px; background: ';
+	theHTML += buildGradient();
+	theHTML += '} #saved'+numSaved + ' .popup{display:none;}';
+	theHTML += '</style><div class="popup">background: '+buildGradient()+'</div></div>';
+
+	jQuery("#savedGradients").append(theHTML);
+
+	numSaved++;
+
+	console.log('theHTML: ' + theHTML);
+}
+
+jQuery("#savedGradients div").live("hover", function(){
+	jQuery("#output").val(jQuery(this).find(".popup").html());	
+});
 
 jQuery("ul input").bind("change", function(){
   var $obj = jQuery(this);
@@ -16,9 +35,9 @@ jQuery("ul input").bind("change", function(){
   }
   console.dir(gradients);
   
-  buildGradient();
+  var bg = buildGradient();
 
-  jQuery.bbq.pushState(jQuery.param(gradients));
+  updateGradient(bg);
 });
 
 jQuery("#toggleorientation").bind("click", function(){
@@ -28,7 +47,7 @@ jQuery("#toggleorientation").bind("click", function(){
     orientation = "top";
   }
 
-  buildGradient();
+  updateGradient(buildGradient());
 });
 
 var gradients = {
@@ -61,11 +80,20 @@ buildGradient = function(){
   });
 
   bg += ")";
+
+  return bg;
+}
+
+updateGradient = function(bg){
   jQuery("#gradient").css({"background": bg});
 
   console.log("background: " + bg);
 
   jQuery("#output").val("background: " + bg);
+
+  saveTemplate(gradients);
+
+  jQuery.bbq.pushState(jQuery.param(gradients));	
 }
 
 getProperties();

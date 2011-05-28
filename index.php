@@ -100,6 +100,8 @@
       </form>
       <textarea id="output" rows="5" cols="80"></textarea>
       </div>
+
+      <div id="savedGradients"></div>
       
     </div>
     <footer>
