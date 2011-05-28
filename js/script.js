@@ -14,14 +14,13 @@ var init = function(){
   for(var i = 0; i < numStops; i++){
     coord = i * stopDistribution;
 
-    color = buildRandomHexColor(i);
-
     var theHTML = '<li><label for="stop'
                    + i + 'color">Stop '
                    + i + ' Color:</label><input type="text" value="' 
-                   + color + '" id="stop' 
+                   + buildRandomHexColor(i) + '" id="stop' 
                    + i + 'color" name="stop'
                    + i + 'color">'+generateLocation(i,coord)+'</li>';
+
     jQuery("#controls ul").append(theHTML);
   }
 
@@ -97,6 +96,8 @@ var saveTemplate = function(gradients){
 	numSaved++;
 
 	console.log('theHTML: ' + theHTML);
+  
+  jQuery.bbq.pushState(jQuery.param(gradients));  
 }
 
 jQuery("#savedGradients div").live("hover", function(){
@@ -176,8 +177,6 @@ updateGradient = function(bg){
   jQuery("#output").val("background: " + bg);
 
   saveTemplate(gradients);
-
-  jQuery.bbq.pushState(jQuery.param(gradients));	
 }
 
 init();
