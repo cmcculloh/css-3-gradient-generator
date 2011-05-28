@@ -31,73 +31,24 @@
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-1.7.min.js"></script>
-
-  <style>
-    #gradient{
-      width: 600px;
-      height: 200px;
-      border: 1px solid black;
-    }
-  </style>
 </head>
 
 <body>
 
   <div id="container">
     <header>
-
+      <h1>Limeberry - A Granular CSS 3 Color Gradient Generator</h1>
+      <p><em>Under HEAVY development. If it is broken, I'm probably working on it right now. Reload in a minute or two and it will most likely be fixed. Soon we will have a dev URL and a stable URL and the stable one will always be, well, stable...</em></p>
     </header>
     <div id="main" role="main">
       <div id="gradient"></div>
       <div id="controls">
-        <ul><?php
-          $numstops = $_GET["numstops"];
-          if(!isset($numstops)){
-            $numstops=8;
-          }
-          $stopdistribution = 100/$numstops;
-
-          for($i=0;$i<$numstops;$i++){
-            echo '<li>';
-            $stop = $i * $stopdistribution;
-            echo '<label for="stop'.$i.'location">Stop '.$i.' Location:</label><input type="number" min="0" step="0.001" value="'.$stop.'" id="stop' . $i . 'location" name="stop'. $i . 'location">';
-            $b = 10 - $i;
-            if($b < 0){
-              $b = $b * -1;
-            }
-            if($i < 10){
-              $color = $i . $i . $b;
-            }else if($i < 20){
-              $color = ($i * 5) . $i . $b;
-            }else if($i < 30){
-              $color = ($i * 3) . $i . $b;
-            }else if($i < 50){
-              $color = ($i * 2) . $i . $b;
-            }else{
-              $color = $i . $i . $b;
-            }
-            
-            if(strlen($color) > 3 && strlen($color) < 6){
-              if(strlen($color) == 4){
-                $color = substr($color, 0, 3);
-              }else{
-                $color.= 0;
-              }
-            }else if(strlen($color) > 6){
-              $color = substr($color, 0, 6);
-            }
-            echo ' <label for="stop'.$i.'color">Stop '.$i.' Color:</label><input type="text" value="' . $color . '" id="stop' . $i . 'color" name="stop'. $i . 'color">';
-            echo '</li>';
-          }
-        ?></ul>
+        <ul></ul>
         <br>
         <p><input type="button" value="toggle orientation" id="toggleorientation"></p>
         <br>
-      <form>
-        <label for="numstops">Number of Stops:</label><input type="number" min="0" step="1" value="8" name="numstops" id="numstops"><br>
+        <label for="numstops">Number of Stops(DOES NOT SAVE WORK!):</label><input type="number" min="0" step="1" value="8" name="numstops" id="numstops"><br>
 
-        <input type="submit" value="change stops. DOES NOT SAVE CURRENT WORK">
-      </form>
       <textarea id="output" rows="5" cols="80"></textarea>
       </div>
 
