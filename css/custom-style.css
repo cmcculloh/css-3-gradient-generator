@@ -1,5 +1,30 @@
     #gradient{
-      width: 600px;
+      width: 200px;
       height: 200px;
       border: 1px solid black;
+      float: left;
+      margin: 15px;
     }
+
+	#info{
+		width: 300px;
+		float: left;
+		margin-left: 20px;
+	}
+
+	#controls{
+		clear: both;
+	}
+
+	#container{padding: 15px;}
+
+	header{margin: 15px;}
+
+	#savedGradients{
+		margin: 10px;
+	}
+
+	h1{
+		font-size: 2em;
+		margin: 20px;
+	}

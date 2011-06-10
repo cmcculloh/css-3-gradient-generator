@@ -42,14 +42,14 @@
     </header>
     <div id="main" role="main">
       <div id="gradient"></div>
-      <div id="controls">
-        <ul></ul>
-        <br>
-        <p><input type="button" value="toggle orientation" id="toggleorientation"></p>
-        <br>
+      <div id="info">
         <label for="numstops">Number of Stops(DOES NOT SAVE WORK!):</label><input type="number" min="0" step="1" value="8" name="numstops" id="numstops"><br>
 
-      <textarea id="output" rows="5" cols="80"></textarea>
+        <textarea id="output" rows="8" cols="30"></textarea>
+        <p><input type="button" value="toggle orientation" id="toggleorientation"></p>
+      </div>
+      <div id="controls">
+        <ul></ul>
       </div>
 
       <div id="savedGradients"></div>
